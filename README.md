@@ -50,11 +50,7 @@ Le formulaire inclut :
 
 ### Administration
 
-L'espace admin est volontairement absent de la navigation publique. Il est accessible directement via :
-
-```text
-/admin
-```
+L'espace admin est volontairement absent de la navigation publique :
 
 Il permet aux administrateurs authentifiés de :
 
@@ -76,79 +72,6 @@ Il permet aux administrateurs authentifiés de :
 - [Recharts](https://recharts.org/) pour les visualisations admin
 - CSS responsive personnalisé
 
-## Prérequis
-
-- Node.js 18 ou version ultérieure.
-- npm.
-- Un projet Supabase pour activer les inscriptions et l'administration.
-
-## Installation
-
-Cloner le projet puis installer les dépendances :
-
-```bash
-git clone https://github.com/AbdelG06/Esisaclubdebat.git
-cd Esisaclubdebat
-npm install
-```
-
-Créer un fichier `.env` à la racine :
-
-```env
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-public-anon-key
-```
-
-> Ne jamais publier `.env`. Le fichier est ignoré par Git. Utilisez `.env.example` pour documenter les variables sans exposer de secret.
-
-## Configuration Supabase
-
-1. Créer un projet Supabase.
-2. Ouvrir **SQL Editor**.
-3. Exécuter le contenu de [`supabase/schema.sql`](./supabase/schema.sql).
-4. Créer un utilisateur administrateur dans **Authentication**.
-5. Activer la réplication realtime de la table `inscriptions` dans les publications Supabase.
-6. Renseigner les variables du fichier `.env`.
-
-Le schéma configure :
-
-- La table `inscriptions`.
-- Les contraintes de validation.
-- L'unicité du numéro de téléphone.
-- Row Level Security.
-- L'insertion publique des inscriptions.
-- La lecture, modification et suppression réservées aux utilisateurs authentifiés.
-
-## Développement
-
-Lancer le serveur de développement :
-
-```bash
-npm run dev
-```
-
-Le site sera disponible sur l'URL affichée par Vite, généralement :
-
-```text
-http://localhost:5173
-```
-
-## Scripts disponibles
-
-| Commande | Description |
-| --- | --- |
-| `npm run dev` | Lance le serveur de développement |
-| `npm run build` | Génère le build de production |
-| `npm run preview` | Prévisualise le build de production |
-
-## Routes
-
-| Route | Usage |
-| --- | --- |
-| `/` | Accueil et formulaire d'inscription |
-| `/le-debat` | Présentation du débat et du public speaking |
-| `/bureau` | Présentation du bureau du club |
-| `/admin` | Connexion et tableau de bord d'administration |
 
 ## Structure du projet
 
@@ -176,40 +99,6 @@ http://localhost:5173
 ├── package.json
 └── vite.config.js
 ```
-
-## Déploiement
-
-Le projet peut être déployé sur Vercel, Netlify, Render ou toute plateforme compatible avec Vite.
-
-Paramètres recommandés :
-
-- **Build command** : `npm run build`
-- **Output directory** : `dist`
-- **Install command** : `npm install`
-
-Ajouter ces variables d'environnement dans la plateforme de déploiement :
-
-```text
-VITE_SUPABASE_URL
-VITE_SUPABASE_ANON_KEY
-```
-
-Pour une application monopage, configurer une réécriture vers `index.html` afin que les routes `/le-debat`, `/bureau` et `/admin` fonctionnent après actualisation.
-
-## Sécurité
-
-- Ne jamais commiter un fichier `.env`.
-- La clé `VITE_SUPABASE_ANON_KEY` est une clé publique côté client, mais les règles RLS restent indispensables.
-- Ne jamais exposer de clé Supabase `service_role` dans le frontend.
-- Utiliser un compte administrateur Supabase dédié.
-- Régénérer immédiatement toute clé qui aurait été publiée par erreur.
-
-## Contribution
-
-1. Créer une branche dédiée.
-2. Effectuer une modification ciblée.
-3. Vérifier le build avec `npm run build`.
-4. Ouvrir une pull request avec une description claire.
 
 ## Licence
 
